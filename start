@@ -1,0 +1,2 @@
+#!/bin/bash
+screen -S Sand1 -d -m /home/steam/sandstorm/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping Oilfield?Scenario=Scenario_Refinery_Checkpoint_Security?port=7777?queryport=27015?MaxPlayers=6 -hostname="insTACTICAL.com - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" -EnableCheats
