@@ -1,0 +1,94 @@
+#!/bin/bash
+
+param=$1
+var1=$(ps -u steam | grep -c Insurgency)
+
+var2="start"
+#var2="startpw"
+
+printf $(TZ=America/Los_Angeles date +'%Y-%m-%d_%H:%M')
+printf " "
+
+if [[ -z "$param" ]]; then
+  echo "Correct usage: ./insserver start|stop|restart"
+  exit
+fi
+
+if  ! [[ "$param" =~ ^(start|stop|restart)$ ]]; then
+  echo "Correct usage: ./insserver start|stop|restart"
+  exit
+else
+  if [ "$param" == "stop" ]; then
+    if ps -u steam | grep -q Insurgency; then
+      screen -X -S "Sand1" stuff "^C"
+      sleep 4
+      if ps -u steam | grep -q Insurgency; then
+        killall screen
+        sleep 2
+        echo "Force stopped!" | tee -a ~/autoRestart.log
+        exit
+      else
+        echo "Stopped!"
+        exit
+      fi
+    fi
+  fi
+
+  if (( $var1 > 1 )); then
+    echo "More than one server session. Destroying all and starting one..."
+    killall screen
+    echo "Starting in: "
+    for i in 5 4 3 2 1
+      do
+        printf "$i.."
+        sleep 1
+    done
+    /home/steam/$var2
+    echo "Started one server this time."
+    exit
+  fi
+
+  if [ "$param" == "start" ]; then
+    if ps -u steam | grep -q Insurgency; then
+      echo "Server is already running."
+      exit
+    else
+      /home/steam/$var2
+      echo "Started!"
+      exit
+    fi
+
+  elif [ "$param" == "restart" ]; then
+    if ps -u steam | grep -q Insurgency; then
+      screen -X -S "Sand1" stuff "^C"
+      echo "Stopping in: "
+      for i in 4 3 2 1
+        do
+          printf "$i.."
+          sleep 1
+      done
+
+      if ps -u steam | grep -q Insurgency; then
+        echo "Failed. Force stopping... "
+        killall screen
+        for i in 2 1
+          do
+            printf "$i.."
+            sleep 1
+        done
+
+        if ps -u steam | grep -q Insurgency; then
+          echo "Force stopped!" | tee -a ~/autoRestart.log
+        fi
+      else
+        echo "Stopped!"
+      fi
+      /home/steam/$var2
+      echo "Restarted!" | tee -a ~/autoRestart.log
+      exit
+    else
+      echo "Server is offline!"
+      exit
+    fi
+  fi
+fi
