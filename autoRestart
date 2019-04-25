@@ -1,0 +1,87 @@
+#!/bin/bash
+# Using this as a cronjob, this checks to see if a server instance is running
+# and people are playing. Will only restart the server instance if it exists
+# and there are no players.
+
+# TODO: Implement maxCpuBugCheck()
+# A server bug causes the CPU to max out and prevents players from joining. 
+# Only a restart resolves the issue.
+function maxCpuBugCheck() {
+  i=1                 # Initial loop counter
+  loopCount=0         # DEBUG: Current loop count
+  totalLoopCount=6    # Number of times to check if people are playing.
+
+  while [ $i -lt $totalLoopCount ]
+  do
+    insCPUfloat=$( top -b -n 1 -d 0.2 -p `pgrep InsurgencyServe | tr "\\n" "," | sed 's/,$//'` | tail -1 | awk '{print $9}' )
+    insCPU=$( printf "%.0f" $insCPUfloat )
+
+    if [[ $insCPU -gt 95 ]]; then
+      loopCount=$[$loopCount +1]
+
+      if [ $loopCount -eq $totalLoopCount ]; then
+        echo "insCPU: $[$insCPU] > 95. ($[$loopCount] of $[$totalLoopCount])."
+        ~/insserver restart
+        #echo $(TZ=America/Los_Angeles date +'%Y-%m-%d_%H:%M') $1 Success >> ~/autoRestart.log
+        exit
+      else
+        echo "insCPU: $[$insCPU] > 95. ($[$loopCount] of $[$totalLoopCount]). Continuing through loop to check if server is bugged."
+        for j in {5..0}
+          do
+            printf "$[$j].."
+            sleep 1
+        done
+        printf "\n"
+        continue
+      fi
+    else
+      echo "Server is not bugged."
+      #echo $(TZ=America/Los_Angeles date +'%Y-%m-%d_%H:%M') Failed "insCPU: $[$insCPU] < 95, loopCount: $[$loopCount]" >> ~/autoRestart.log
+      exit
+    fi
+  done
+}
+
+function logStatus() {
+  status=$1
+  echo ${date} ${status} >> ~/autoRestart.log
+}
+
+function isServerRunning() {
+  serverExist=$(ps -u steam | grep -c Insurgency)
+
+  if [ ${serverExist} -ne 1 ]; then
+    status="No server is running. Script aborted."
+    logStatus "${status}"
+    exit
+  fi
+}
+
+function isNumPlayersApiWorking() {
+  apiResult=$( python ~/python-valve/tests/getSandstormServerInfo.py 2>&1 )
+  errorCheck=$( echo "$apiResult" | grep -c Error ) # Expected result: "2"
+
+  if [ ${errorCheck} -gt 0 ]; then
+    status="Failed: Server Query API Timed out. Aborting restart procedure."
+    logStatus "${status}"
+    exit
+  fi
+}
+
+function restart() {
+  numPlayers=$( python ~/python-valve/tests/getSandstormServerInfo.py 2>&1 )
+
+  if [ ${numPlayers} -gt 0 ]; then
+    status="Failed: ${numPlayers} player(s) on the server. Aborting restart procedure."
+    logStatus "${status}"
+  else
+    status="Success: There is no one on the server. Executing restart procedure."
+    logStatus "${status}"
+    ~/insserver restart
+  fi
+}
+
+date=$( TZ=America/Los_Angeles date +'%Y-%m-%d_%H:%M' )
+isServerRunning # Exits script if fails
+isNumPlayersApiWorking # Exits script if fails
+restart # Only restart if server is empty
