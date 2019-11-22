@@ -1,0 +1,18 @@
+#!/bin/bash
+# Randomized array credit: http://cassandra.confluvium.info/config/start.sh.txt
+
+array[0]="Town?Scenario=Scenario_Hideout_Checkpoint_Security"
+array[1]="Oilfield?Scenario=Scenario_Refinery_Checkpoint_Security"
+array[2]="Mountain?Scenario=Scenario_Summit_Checkpoint_Security"
+array[3]="Canyon?Scenario=Scenario_Crossing_Checkpoint_Security"
+array[4]="Farmhouse?Scenario=Scenario_Farmhouse_Checkpoint_Security"
+array[5]="Precinct?Scenario=Scenario_Precinct_Checkpoint_Security"
+array[6]="Compound?Scenario=Scenario_Outskirts_Checkpoint_Security"
+array[7]="Ministry?Scenario=Scenario_Ministry_Checkpoint_Security"
+array[8]="Sinjar?Scenario=Scenario_Hillside_Checkpoint_Security"
+
+size=${#array[@]}
+index=$(($RANDOM % $size))
+#echo ${array[$index]}
+
+screen -S Sand1 -d -m ~/sandstorm/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping ${array[$index]}?MaxPlayers=8 -Port=27102 -QueryPort=27131 -MapCycle=Mapcycle -mutators=Vampirism -GameStats -GSLTToken=4815162342 -log -LogCmds="LogGameplayEvents Log" -hostname="insTactical.com - No Rush / Extra Health - - - - - - - - - - - - - - - - - -"
