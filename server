@@ -7,7 +7,7 @@ date=$( TZ=America/Los_Angeles date +'%Y-%m-%d_%H:%M' )
 printf "$date "
 
 # Exit script if no/wrong params are given
-if [[ ( -z $param ) || ( ! $param =~ ^(start|stop|restart)$ ) ]]; then
+if [[ ( -z $param ) || ( ! $param =~ ^(start|stop|restart|forceRestart)$ ) ]]; then
   printf "Correct usage: ./insserver start|stop|restart\n"
   exit 1
 fi
@@ -163,6 +163,10 @@ case $param in
     ;;
   restart)
     promptIfPlayerOnline
+    handleRestart
+    exit
+    ;;
+  forceRestart)
     handleRestart
     exit
     ;;
