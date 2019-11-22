@@ -21,7 +21,7 @@ function maxCpuBugCheck() {
 
       if [ $loopCount -eq $totalLoopCount ]; then
         echo "insCPU: $[$insCPU] > 95. ($[$loopCount] of $[$totalLoopCount])."
-        ~/insserver restart
+        ~/server forceRestart
         #echo $(TZ=America/Los_Angeles date +'%Y-%m-%d_%H:%M') $1 Success >> ~/autoRestart.log
         exit
       else
@@ -77,7 +77,7 @@ function restart() {
   else
     status="Success: There is no one on the server. Executing restart procedure."
     logStatus "${status}"
-    ~/insserver restart
+    ~/server forceRestart
   fi
 }
 
