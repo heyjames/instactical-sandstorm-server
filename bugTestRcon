@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# There is an RCON bug in Insurgency: Sandstorm where each RCON thread is never
+# destroyed. The server starts to lag after a large number of threads and can
+# even freeze the server.
+
+i="0"
+
+while [ $i -lt 500 ]
+do
+./rconn "say test"
+i=$[$i+1]
+done

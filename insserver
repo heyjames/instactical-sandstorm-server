@@ -1,11 +1,13 @@
 #!/bin/bash
 
+# Old implementation. See new file "server" for an updated version
+
 param=$1
 var1=$(ps -u steam | grep -c Insurgency)
 
-#var2="start"
+var2="start"
 #var2="startxp"
-var2="startpw"
+#var2="startpw"
 
 printf $(TZ=America/Los_Angeles date +'%Y-%m-%d_%H:%M')
 printf " "

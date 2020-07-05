@@ -1,0 +1,9 @@
+#!/bin/bash
+
+RCON_PWD=
+RCON_IP=111.111.111.111
+RCON_PORT=27015
+
+rcon -H 111.111.111.111 -p 27131 -P yourRconPassword "$1"
+#rcon -H 111.111.111.111 -p 27015 -P yourRconPassword "gamemodeproperty $1"
+#rcon -H $RCON_IP -p $RCON_PORT -P $RCON_PWD < ./config/rconCommand.txt

@@ -1,9 +1,0 @@
-# Ensure the server is running every minute
-* * * * * /home/steam/insserver start >> /home/steam/cron.log
-
-# Restart the server every 2 hours if server is empty
-0 */2 * * * /home/steam/autoRestart
-
-# Clear text in cron.log and autoRestart.log every quarter
-0 0 1 */3 * > /home/steam/cron.log
-0 0 1 */3 * > /home/steam/autoRestart.log

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Originally created by a YouTube user named diamondpumpkin
+# Courtesy of diamondpumpkin @ Youtube. Source: https://www.youtube.com/watch?v=OW9ShByoZI4
 
 APP_ID=$1
 DIR=$2
