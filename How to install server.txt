@@ -1,0 +1,16 @@
+################################# As root user
+apt update
+apt upgrade
+apt install lib32gcc1
+optional? apt install python
+optional? apt install python-pip
+adduser ins
+ins-sissm password: myPassword
+su - ins
+cd ~
+mkdir iss
+mkdir ~/Steam && cd ~/Steam
+wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+tar -xvzf steamcmd_linux.tar.gz
+cd ~
+~/Steam/steamcmd.sh +login anonymous +force_install_dir /home/ins/iss +app_update 581330 validate +quit
