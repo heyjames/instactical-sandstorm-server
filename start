@@ -1,15 +1,19 @@
 #!/bin/bash
 # Randomized array credit: http://cassandra.confluvium.info/config/start.sh.txt
 
-array[0]="Town?Scenario=Scenario_Hideout_Checkpoint_Security"
-array[1]="Oilfield?Scenario=Scenario_Refinery_Checkpoint_Security"
-array[2]="Mountain?Scenario=Scenario_Summit_Checkpoint_Security"
-array[3]="Canyon?Scenario=Scenario_Crossing_Checkpoint_Security"
-array[4]="Farmhouse?Scenario=Scenario_Farmhouse_Checkpoint_Security"
-array[5]="Precinct?Scenario=Scenario_Precinct_Checkpoint_Security"
-array[6]="Compound?Scenario=Scenario_Outskirts_Checkpoint_Security"
-array[7]="Ministry?Scenario=Scenario_Ministry_Checkpoint_Security"
-array[8]="Sinjar?Scenario=Scenario_Hillside_Checkpoint_Security"
+array[0]="?Scenario=Scenario_Crossing_Checkpoint_Security"
+array[1]="?Scenario=Scenario_Farmhouse_Checkpoint_Security"
+array[2]="?Scenario=Scenario_Summit_Checkpoint_Security"
+array[3]="?Scenario=Scenario_Refinery_Checkpoint_Security"
+array[4]="?Scenario=Scenario_Precinct_Checkpoint_Security"
+array[5]="?Scenario=Scenario_Hideout_Checkpoint_Security"
+array[6]="?Scenario=Scenario_Ministry_Checkpoint_Security"
+array[7]="?Scenario=Scenario_Hillside_Checkpoint_Security"
+array[8]="?Scenario=Scenario_Outskirts_Checkpoint_Security"
+array[9]="?Scenario=Scenario_PowerPlant_Checkpoint_Security"
+array[10]="?Scenario=Scenario_Tideway_Checkpoint_Security"
+array[11]="?Scenario=Scenario_Bab_Checkpoint_Security"
+array[12]="?Scenario=Scenario_Citadel_Checkpoint_Security"
 
 size=${#array[@]}
 index=$(($RANDOM % $size))
