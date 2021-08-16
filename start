@@ -19,4 +19,4 @@ size=${#array[@]}
 index=$(($RANDOM % $size))
 #echo ${array[$index]}
 
-screen -S Sand1 -d -m /home/steam/sandstorm/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping ${array[$index]}?MaxPlayers=10 -Port=7777 -QueryPort=27015 -mutators=Vampirism -GameStats -GSLTToken= -log -LogCmds="LogGameplayEvents Log" -hostname="insTactical.com - Slow / No Rushing - - - - - - - - - - - - - - - - - -"
+screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping ${array[$index]}?MaxPlayers=6 -Port=7777 -QueryPort=27015 -GameStats -GSLTToken= -log -LogCmds="LogGameplayEvents Log" -hostname="insTactical - Slow / No Rush"
