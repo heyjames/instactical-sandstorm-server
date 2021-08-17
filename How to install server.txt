@@ -1,29 +1,18 @@
-################################# As root user
+# As root user...
+
 apt update
 apt upgrade
-
-# apt install lib32gcc1
 apt install lib32gcc-s1
-
-optional? apt install python
-optional? apt install python-pip
-
+apt install unzip
+apt install screen
+apt install tmux
 adduser ins
-ins-sissm password: myPassword
-
-# Give sudo access to ins
-optional? usermod -aG sudo ins
-
 su - ins
+
+# As ins user...
 cd ~
 mkdir iss
 mkdir ~/Steam && cd ~/Steam
-
-# Method 1
-wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
-tar -xvzf steamcmd_linux.tar.gz
-# Method 2 (last used)
 curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
-
 cd ~
 ~/Steam/steamcmd.sh +login anonymous +force_install_dir /home/ins/iss +app_update 581330 validate +quit
