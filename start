@@ -19,4 +19,8 @@ size=${#array[@]}
 index=$(($RANDOM % $size))
 #echo ${array[$index]}
 
-screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping ${array[$index]}?MaxPlayers=6 -Port=7777 -QueryPort=27015 -GameStats -GSLTToken= -log -LogCmds="LogGameplayEvents Log" -motd -hostname="insTactical - Slow / No Rush"
+# Public
+# screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping ${array[$index]}?MaxPlayers=6 -Port=7777 -QueryPort=27015 -GameStats -GSLTToken=thisisasecret -log -LogCmds="LogGameplayEvents Log" -motd -hostname="insTactical - Slow / No Rush" -noeac
+
+# Private - Development
+screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping Ministry?Scenario=Scenario_Ministry_Checkpoint_Security?MaxPlayers=6?password=thisisasecret -Port=7777 -QueryPort=27015 -log -LogCmds="LogGameplayEvents Log" -motd -hostname="insTactical - Slow / No Rush" -noeac -EnableCheats
