@@ -1,2 +1,7 @@
--Don't rush objectives
--"Run 'n gunning" and prioritizing kill counts prohibited
+You may be kicked/banned for:
+-Objective rushing
+-Arcade style gameplay
+-Bot spawn camping
+-Immature behavior
+-Repeatedly running into teammates' line of fire
+-Prioritizing kills over team play
