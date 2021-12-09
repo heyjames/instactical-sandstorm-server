@@ -4,7 +4,7 @@ window.onload = () => {
 
   copyBtn.addEventListener('click', () => handleCopyBtn(ip, copyBtn));
 }
-
+  
 const handleCopyBtn = async (ip, copyBtn) => {
   try {
     let inputEl = document.createElement("input");
@@ -19,6 +19,6 @@ const handleCopyBtn = async (ip, copyBtn) => {
       copyBtn.innerHTML = "Copy";
     }, 3000);
   } catch (error) {
-    console.error('Async: Could not copy text: ', error);
+    console.error('Could not copy text:', error);
   }
 }

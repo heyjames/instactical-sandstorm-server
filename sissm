@@ -1,0 +1,65 @@
+#!/bin/bash
+
+param=$1
+
+# Exit script if no/wrong params are given
+if [[ ( -z $param ) || ( ! $param =~ ^(start|stop|restart|status)$ ) ]]; then
+  printf "Correct usage: ./sissm.sh start|stop|restart|status\n"
+  exit 1
+fi
+
+function handleStatus() {
+  if screen -list | grep -q "SISSM1"; then
+    echo "SISSM is running"
+  else
+    echo "SISSM is not running"
+  fi
+}
+
+function handleStart() {
+  if screen -list | grep -q "SISSM1"; then
+    echo "It's already running"
+  else
+    cd /home/ins/SISSM-Beta02.9/Linux/
+    screen -S SISSM1 -d -m ./sissm-0.2.9-custom sissm.cfg
+    sleep 1
+    screen -ls
+  fi
+}
+
+function handleStop() {
+  if screen -list | grep -q "SISSM1"; then
+    screen -X -S "SISSM1" stuff "^C"
+    sleep 5
+    screen -ls
+  else
+    echo "It's not running"
+    exit
+  fi
+}
+
+function handleRestart() {
+  handleStop
+  sleep 2
+  handleStart
+}
+
+# Begin program
+case $param in
+  status)
+    handleStatus
+    exit
+    ;;
+  stop)
+    handleStop
+    exit
+    ;;
+  start)
+    handleStart
+    exit
+    ;;
+  restart)
+    handleRestart
+    exit
+    ;;
+esac

@@ -1,22 +1,31 @@
 # instactical-sandstorm-server
-Insurgency: Sandstorm Server Configuration Files
 
-Files and Bash scripts that will help run a dedicated Insurgency: Sandstorm community server
+Files and Bash scripts that help run the [insTactical](http://info.insTactical.com), an Insurgency: Sandstorm Dedicated server, with [SISSM](https://github.com/schroeder-lvb/sissm "Simple Insurgency Sandstorm Server Manager")
 
-#### Start Server
-Run with ./server <start|stop|restart>
-* Will automatically check if players are in game if user attempts to stop or restart a server
-* Can detect if graceful server stop fails and will attempt a force stop (killall command)
-* Copies necessary files from a consolidated folder to appropriate directories for easy server config edits without having to navigate to different nested folders
+Note: The restart script should be in the scripts folder, otherwise SISSM will not restart properly.
 
-#### Auto restart
-Run with ./autoRestart
-* Checks if the server if already running, if the API for checking number of players is working, and then restarts server if it is empty
+Follow the instructions to install the server and SISSM outlined in the `instructions.txt` file
 
-#### Cron jobs
-Copy and paste into cron file ('crontab -e' in terminal)
-* Clear server status log files, run autoRestart and server checks periodically
+#### Start Server Screen Session
+```
+./server <[start|stop|restart|status|update]>
+```
 
-#### Bug Test RCON
-* A Bash script to test whether New World Interactive fixed the zombie threads that are never destroyed when using RCON
-* Server times out at about 900 RCON uses
+#### Start SISSM Screen Session
+```
+./sissm <[start|stop|restart|status]>
+```
+
+## Session Usage
+#### List All Sessions
+```
+screen -ls
+```
+
+#### View a Current Session
+```
+screen -r <session-name>
+```
+
+#### Detach (Not terminate) from a Session
+<kbd>CTRL</kbd>+<kbd>A</kbd>&nbsp;&nbsp;&nbsp;<kbd>D</kbd>

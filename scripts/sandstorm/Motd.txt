@@ -1,7 +1,8 @@
+!!! Avoid being auto-kicked by server - type 'aa' and read responses !!!
+
 You may be kicked/banned for:
 -Objective rushing
--Arcade style gameplay
 -Bot spawn camping
 -Immature behavior
--Repeatedly running into teammates' line of fire
+-Repeatedly running into the line of fire
 -Prioritizing kills over team play

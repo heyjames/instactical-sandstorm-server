@@ -12,10 +12,11 @@ body {
 }
 
 .player {
+  display: inline-block;
   background-color: #B4B4B4;
   color: #000000;
   text-decoration: none;
-  padding: 1px 6px;
-  margin: 4px 1px 0px 0px;
+  padding: 0px 6px 1px 6px;
+  margin: 4px 0px 0px 0px;
   border-radius: 8px;
 }

@@ -2,13 +2,12 @@
 
 param=$1
 var2="start"
-#var2="startpw"
 date=$( TZ=America/Los_Angeles date +'%Y-%m-%d_%H:%M' )
 printf "$date "
 
 # Exit script if no/wrong params are given
-if [[ ( -z $param ) || ( ! $param =~ ^(start|stop|restart|forceRestart)$ ) ]]; then
-  printf "Correct usage: ./insserver start|stop|restart\n"
+if [[ ( -z $param ) || ( ! $param =~ ^(start|stop|restart|status|update)$ ) ]]; then
+  printf "Correct usage: ./server start|stop|restart|status|update\n"
   exit 1
 fi
 
@@ -22,7 +21,7 @@ function outputCountdown() {
 }
 
 function isServerRunning() {
-  # Get processes running from current Ubuntu user and counts any process 
+  # Get processes running from current Ubuntu user and counts any process
   # matching the word "Insurgency"
   numServerInstance=$( ps -u $USER | grep -c Insurgency )
 
@@ -30,17 +29,6 @@ function isServerRunning() {
     return 0
   else
     return 1
-  fi
-}
-
-function getNumPlayers() {
-  numPlayers=$( python $HOME/python-valve/tests/getSandstormServerInfo.py )
-  error=$( echo "$numPlayers" | grep -c Error ) # If error, result="1"
-
-  if [[ $error > 0 ]]; then
-    echo "Error: Could not get number of players from API service."
-  else
-    echo $numPlayers
   fi
 }
 
@@ -55,25 +43,6 @@ function prompt() {
       *) printf "Please answer yes or no. ";;
     esac
   done
-}
-
-function promptIfPlayerOnline() {
-  $( ! isServerRunning ) && { printf "Server is not running.\n"; exit; }
-
-  numPlayers=$( getNumPlayers )
-  error=$( echo "$numPlayers" | grep -c "Error" )
-  question=""
-
-  #printf "\nnumPlayers: $numPlayers...\n"
-  #printf "Error: $error...\n"
-
-  if [[ $error > 0 ]]; then
-    question="API isn't working right now."
-    prompt "$question"
-  elif [[ $numPlayers > 0 ]]; then
-    question="$numPlayers player(s) are playing on the server."
-    prompt "$question"
-  fi
 }
 
 function forceStop() {
@@ -106,8 +75,7 @@ function stop() {
 }
 
 function handleStop() {
-  # Probably unecessary since promptIfPlayerOnline() checks
-  $( ! isServerRunning ) && { printf "Server is not running*.\n"; exit; }
+  $( ! isServerRunning ) && { printf "Server is not running.\n"; exit; }
 
   # stop "$1"
   quiet=$1
@@ -123,23 +91,14 @@ function handleStop() {
   fi
 }
 
-function copyConfigScripts() {
-  cp $HOME/config/MapCycle.txt $HOME/sandstorm/Insurgency/Config/Server/MapCycle.txt
-  cp $HOME/config/Admins.txt $HOME/sandstorm/Insurgency/Config/Server/Admins.txt
-  cp $HOME/config/Game.ini $HOME/sandstorm/Insurgency/Saved/Config/LinuxServer/Game.ini
-  cp $HOME/config/Engine.ini $HOME/sandstorm/Insurgency/Saved/Config/LinuxServer/Engine.ini
-  #cp $HOME/sandstorm/Insurgency/Config/Server/Bans.json $HOME/config/Bans.json
-  sleep 1
-}
-
 function handleStart() {
   quiet=$1
 
   if $( isServerRunning ); then
     printf "Server is already running.\n"
   else
-    copyConfigScripts
-    $HOME/$var2
+    #copyConfigScripts
+    $HOME/scripts/$var2
     [[ -z $quiet ]] && printf "Started.\n"
   fi
 }
@@ -150,10 +109,26 @@ function handleRestart() {
   printf "Restarted!\n"
 }
 
+function handleStatus() {
+  if $( isServerRunning ); then
+    echo "Online"
+  else
+    echo "Offline"
+  fi
+}
+
+function handleUpdate() {
+  prompt "Have you installed Steam already?"
+  /home/ins/Steam/steamcmd.sh +login anonymous +force_install_dir /home/ins/iss +app_update 581330 validate +quit
+}
+
 # Begin program
 case $param in
+  status)
+    handleStatus
+    exit
+    ;;
   stop)
-    promptIfPlayerOnline
     handleStop
     exit
     ;;
@@ -162,12 +137,15 @@ case $param in
     exit
     ;;
   restart)
-    promptIfPlayerOnline
     handleRestart
     exit
     ;;
   forceRestart)
     handleRestart
+    exit
+    ;;
+  update)
+    handleUpdate
     exit
     ;;
 esac

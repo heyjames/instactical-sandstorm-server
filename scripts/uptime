@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Polls the game server in the system process and outputs date 
+# and server status to a log file
+# Use screen -S Uptime1 -d -m 
+while true; do
+  date=$( TZ=America/Los_Angeles date +'%Y-%m-%d_%H:%M:%S' )
+  serverCount=$( ps -u $USER | grep -c Insurgency )
+  echo $date: $serverCount >> /home/ins/logs/uptime.log
+  sleep 1
+done

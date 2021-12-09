@@ -1,0 +1,112 @@
+################################################################################
+# After loggin in for the first time as 'root' user
+################################################################################
+apt update && apt upgrade
+apt install lib32gcc-s1 unzip screen
+apt install apache2
+ufw disable
+adduser ins
+
+
+################################################################################
+# Add 'ins' to sudoers file
+################################################################################
+sudo usermod -a -G sudo ins
+
+
+
+################################################################################
+# As 'ins' user
+################################################################################
+su - ins
+
+mkdir ~/iss && mkdir ~/Steam && mkdir ~/scripts && touch ~/scripts/badwords.txt && cd ~/Steam
+
+curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - && cd ~
+
+~/Steam/steamcmd.sh +login anonymous +force_install_dir /home/ins/iss +app_update 581330 validate +quit
+
+
+
+################################################################################
+# Create Sandstorm config directories
+################################################################################
+cd ~ && mkdir -p ~/iss/Insurgency/Saved/Config/LinuxServer 
+cd ~ && mkdir -p ~/iss/Insurgency/Config/Server
+
+
+
+################################################################################
+# Create server and start scripts
+################################################################################
+touch ~/server && chmod +x server && nano ~/server
+touch ~/scripts/start && chmod +x start && nano ~/scripts/start
+
+
+
+################################################################################
+# Copy Sandstorm config files
+################################################################################
+cp ~/scripts/sandstorm/Game.ini ~/iss/Insurgency/Saved/Config/LinuxServer/Game.ini
+cp ~/scripts/sandstorm/Engine.ini ~/iss/Insurgency/Saved/Config/LinuxServer/Engine.ini
+cp ~/scripts/sandstorm/Admins.txt ~/iss/Insurgency/Config/Server/Admins.txt
+cp ~/scripts/sandstorm/Motd.txt ~/iss/Insurgency/Config/Server/Motd.txt
+cp ~/scripts/sandstorm/MapCycle.txt ~/iss/Insurgency/Config/Server/MapCycle.txt
+
+
+
+################################################################################
+# Copy web files
+################################################################################
+sudo cp /home/ins/scripts/varwwwhtml/general.html /var/www/html/general.html
+sudo cp /home/ins/scripts/varwwwhtml/index.html /var/www/html/index.html
+sudo cp /home/ins/scripts/varwwwhtml/script.js /var/www/html/script.js
+sudo cp /home/ins/scripts/varwwwhtml/styles.css /var/www/html/styles.css
+
+
+
+################################################################################
+# Symbolic link server1.html that is generated inside SISSM folder
+################################################################################
+sudo ln -s /home/ins/SISSM-Beta02.9/Linux/server1.html /var/www/html/server1.html
+
+
+
+################################################################################
+# Allow server1.html to be accessed by 'other' users (Fix Apache showing forbidden file access)
+################################################################################
+sudo chmod o+x /home/ins/SISSM-Beta02.9/Linux/server1.html
+sudo chmod o+x /home/ins/SISSM-Beta02.9/Linux/
+sudo chmod o+x /home/ins/SISSM-Beta02.9/
+sudo chmod o+x /home/ins/
+
+
+
+################################################################################
+# Type 'crontab -e' to run server start script every minute
+################################################################################
+#* * * * * /home/ins/server start > /dev/null 2>&1
+
+
+
+################################################################################
+# Notes
+################################################################################
+
+################################################################################
+# After building your own sissm.sh file from the source code directory, copies to sissm folder
+################################################################################
+make
+make clean
+sudo cp ./build/sissm /home/ins/iss/SISSM-Beta02.9/Linux/sissm-0.2.9-custom
+
+
+
+make sure /home/ins/iss/sissm/SISSM-Beta02.9/Linux/server1.html is owned by 'ins'
+
+
+
+################################################################################
+# Watch the server's log file in real-time
+################################################################################
+tail -f /home/ins/iss/Insurgency/Saved/Logs/Insurgency.log
