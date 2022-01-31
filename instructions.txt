@@ -20,38 +20,38 @@ sudo usermod -a -G sudo ins
 ################################################################################
 su - ins
 
-mkdir ~/iss && mkdir ~/Steam && mkdir ~/scripts && touch ~/scripts/badwords.txt && cd ~/Steam
+mkdir /home/ins/iss && mkdir /home/ins/Steam && mkdir /home/ins/scripts && touch /home/ins/scripts/badwords.txt && cd /home/ins/Steam
 
-curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - && cd ~
+curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - && cd /home/ins
 
-~/Steam/steamcmd.sh +login anonymous +force_install_dir /home/ins/iss +app_update 581330 validate +quit
+/home/ins/Steam/steamcmd.sh +login anonymous +force_install_dir /home/ins/iss +app_update 581330 validate +quit
 
 
 
 ################################################################################
 # Create Sandstorm config directories
 ################################################################################
-cd ~ && mkdir -p ~/iss/Insurgency/Saved/Config/LinuxServer 
-cd ~ && mkdir -p ~/iss/Insurgency/Config/Server
+cd /home/ins && mkdir -p /home/ins/iss/Insurgency/Saved/Config/LinuxServer 
+cd /home/ins && mkdir -p /home/ins/iss/Insurgency/Config/Server
 
 
 
 ################################################################################
 # Create server and start scripts
 ################################################################################
-touch ~/server && chmod +x server && nano ~/server
-touch ~/scripts/start && chmod +x start && nano ~/scripts/start
+touch /home/ins/server && chmod +x server && nano /home/ins/server
+touch /home/ins/scripts/start && chmod +x start && nano /home/ins/scripts/start
 
 
 
 ################################################################################
 # Copy Sandstorm config files
 ################################################################################
-cp ~/scripts/sandstorm/Game.ini ~/iss/Insurgency/Saved/Config/LinuxServer/Game.ini
-cp ~/scripts/sandstorm/Engine.ini ~/iss/Insurgency/Saved/Config/LinuxServer/Engine.ini
-cp ~/scripts/sandstorm/Admins.txt ~/iss/Insurgency/Config/Server/Admins.txt
-cp ~/scripts/sandstorm/Motd.txt ~/iss/Insurgency/Config/Server/Motd.txt
-cp ~/scripts/sandstorm/MapCycle.txt ~/iss/Insurgency/Config/Server/MapCycle.txt
+cp /home/ins/scripts/sandstorm/Game.ini /home/ins/iss/Insurgency/Saved/Config/LinuxServer/Game.ini
+cp /home/ins/scripts/sandstorm/Engine.ini /home/ins/iss/Insurgency/Saved/Config/LinuxServer/Engine.ini
+cp /home/ins/scripts/sandstorm/Admins.txt /home/ins/iss/Insurgency/Config/Server/Admins.txt
+cp /home/ins/scripts/sandstorm/Motd.txt /home/ins/iss/Insurgency/Config/Server/Motd.txt
+cp /home/ins/scripts/sandstorm/MapCycle.txt /home/ins/iss/Insurgency/Config/Server/MapCycle.txt
 
 
 
