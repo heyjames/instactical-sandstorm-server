@@ -1,6 +1,18 @@
 #!/bin/bash
-# Randomized array credit: https://github.com/schroeder-lvb
 
+# Remove comments (Steam alias)
+grep -o '^[^#]*' /home/ins/scripts/Admins-labels.txt > /home/ins/scripts/sandstorm/Admins.txt
+sleep 1
+
+cp /home/ins/scripts/sandstorm/Game.ini /home/ins/iss/Insurgency/Saved/Config/LinuxServer/Game.ini
+cp /home/ins/scripts/sandstorm/Engine.ini /home/ins/iss/Insurgency/Saved/Config/LinuxServer/Engine.ini
+cp /home/ins/scripts/sandstorm/Admins.txt /home/ins/iss/Insurgency/Config/Server/Admins.txt
+cp /home/ins/scripts/sandstorm/Motd.txt /home/ins/iss/Insurgency/Config/Server/Motd.txt
+cp /home/ins/scripts/sandstorm/MapCycle.txt /home/ins/iss/Insurgency/Config/Server/MapCycle.txt
+
+sleep 1
+
+# Randomized array credit: https://github.com/schroeder-lvb
 array[0]="?Scenario=Scenario_Crossing_Checkpoint_Security"
 array[1]="?Scenario=Scenario_Farmhouse_Checkpoint_Security"
 array[2]="?Scenario=Scenario_Summit_Checkpoint_Security"
@@ -25,4 +37,4 @@ index=$(($RANDOM % $size))
 
 # Public
 #screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping ${array[$index]}?MaxPlayers=6 -Port=7777 -QueryPort=27015 -GameStats -GSLTToken=secret -log -LogCmds="LogGameplayEvents Log" -motd -hostname="info.insTactical.com - Slow" -noeac
-screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping Town?Scenario=Scenario_Hideout_Checkpoint_Security?MaxPlayers=6 -Port=7777 -QueryPort=27015 -GameStats -GSLTToken=secret -log -LogCmds="LogGameplayEvents Log" -motd -hostname="info.insTactical.com - Slow" -noeac
+screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping Town?Scenario=Scenario_Hideout_Checkpoint_Security?MaxPlayers=8 -Port=7777 -QueryPort=27015 -GameStats -GSLTToken=secret -log -LogCmds="LogGameplayEvents Log" -motd -hostname="info.insTactical.com - Slow" -noeac
