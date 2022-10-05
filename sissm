@@ -20,8 +20,8 @@ function handleStart() {
   if screen -list | grep -q "SISSM1"; then
     echo "It's already running"
   else
-    cd /home/ins/SISSM-Beta02.9/Linux/
-    screen -S SISSM1 -d -m ./sissm-0.2.9-custom sissm.cfg
+    cd /home/ins/SISSM-1.2.0/Linux/
+    screen -S SISSM1 -d -m ./sissm sissm.cfg
     sleep 1
     screen -ls
   fi
