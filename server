@@ -48,7 +48,7 @@ function prompt() {
 function forceStop() {
   printf "Failed..Force stopping in.."
 
-  killall screen
+  killall InsurgencyServer-Linux-Shipping
   outputCountdown 2
 
   if $( isServerRunning ); then
