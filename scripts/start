@@ -2,11 +2,14 @@
 
 # Remove comments (Steam alias)
 grep -o '^[^#]*' /home/ins/scripts/Admins-labels.txt > /home/ins/scripts/sandstorm/Admins.txt
+grep -o '^[^#]*' /home/ins/scripts/Admins-Moderators-labels.txt > /home/ins/scripts/sandstorm/Admins-Moderators.txt
 sleep 1
 
+cp /home/ins/scripts/sandstorm/Mods.txt /home/ins/iss/Insurgency/Config/Server/Mods.txt
 cp /home/ins/scripts/sandstorm/Game.ini /home/ins/iss/Insurgency/Saved/Config/LinuxServer/Game.ini
 cp /home/ins/scripts/sandstorm/Engine.ini /home/ins/iss/Insurgency/Saved/Config/LinuxServer/Engine.ini
 cp /home/ins/scripts/sandstorm/Admins.txt /home/ins/iss/Insurgency/Config/Server/Admins.txt
+cp /home/ins/scripts/sandstorm/Admins-Moderators.txt /home/ins/iss/Insurgency/Config/Server/Admins-Moderators.txt
 cp /home/ins/scripts/sandstorm/Motd.txt /home/ins/iss/Insurgency/Config/Server/Motd.txt
 cp /home/ins/scripts/sandstorm/MapCycle.txt /home/ins/iss/Insurgency/Config/Server/MapCycle.txt
 
