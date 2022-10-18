@@ -6,6 +6,8 @@ Note: The restart script should be in the scripts folder, otherwise SISSM will n
 
 Follow the instructions to install the server and SISSM outlined in the `instructions.txt` file
 
+Additional information can be found in the [server guide at mod.io](https://insurgencysandstorm.mod.io/guides/server-admin-guide)
+
 #### Start Server Screen Session
 ```
 ./server <[start|stop|restart|status|update]>
