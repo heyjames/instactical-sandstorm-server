@@ -3,11 +3,14 @@
 # Remove comments (Steam alias)
 grep -o '^[^#]*' /home/ins/scripts/Admins-labels.txt > /home/ins/scripts/sandstorm/Admins.txt
 grep -o '^[^#]*' /home/ins/scripts/Admins-Moderators-labels.txt > /home/ins/scripts/sandstorm/Admins-Moderators.txt
+grep -o '^[^#]*' /home/ins/scripts/Admins-Senior-labels.txt > /home/ins/scripts/sandstorm/Admins-Senior.txt
+
 sleep 1
 
 cp /home/ins/scripts/sandstorm/Mods.txt /home/ins/iss/Insurgency/Config/Server/Mods.txt
 cp /home/ins/scripts/sandstorm/Game.ini /home/ins/iss/Insurgency/Saved/Config/LinuxServer/Game.ini
 cp /home/ins/scripts/sandstorm/Engine.ini /home/ins/iss/Insurgency/Saved/Config/LinuxServer/Engine.ini
+cp /home/ins/scripts/sandstorm/Admins-Senior.txt /home/ins/iss/Insurgency/Config/Server/Admins-Senior.txt
 cp /home/ins/scripts/sandstorm/Admins.txt /home/ins/iss/Insurgency/Config/Server/Admins.txt
 cp /home/ins/scripts/sandstorm/Admins-Moderators.txt /home/ins/iss/Insurgency/Config/Server/Admins-Moderators.txt
 cp /home/ins/scripts/sandstorm/Motd.txt /home/ins/iss/Insurgency/Config/Server/Motd.txt
@@ -40,5 +43,5 @@ index=$(($RANDOM % $size))
 
 # Public
 #screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping ${array[$index]}?MaxPlayers=6 -Port=7777 -QueryPort=27015 -GameStats -GSLTToken=secret -log -LogCmds="LogGameplayEvents Log" -motd -hostname="info.insTactical.com - Slow" -noeac
-#screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping Town?Scenario=Scenario_Hideout_Checkpoint_Security?MaxPlayers=8 -Port=7777 -QueryPort=27015 -GameStats -GSLTToken=secret -log -LogCmds="LogGameplayEvents Log" -motd -hostname="info.insTactical.com - Slow" -noeac
-screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping ${array[$index]}?Game=CheckpointHardcore?MaxPlayers=6?Mutators=MapVoteLabels,Medic -Mods -ModList=Mods.txt -ModDownloadTravelTo=${array[$index]}?Game=CheckpointHardcore -Port=7777 -QueryPort=27015 -GameStatsToken=secret -GameStats -GSLTToken=secret -log -LogCmds="LogGameplayEvents Log" -motd -hostname="YOUR HOSTNAME GOES HERE" -noeac
+#screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping Town?Scenario=Ministry?Scenario=Scenario_Ministry_Checkpoint_Security?Game=CheckpointHardcore?MaxPlayers=6 -Mutators=MapVoteLabels,Medic -Mods -ModList=Mods.txt -ModDownloadTravelTo=Ministry?Scenario=Scenario_Ministry_Checkpoint_Security?Game=CheckpointHardcore -Port=7777 -QueryPort=27015 -GameStatsToken=secret -GameStats -GSLTToken=secret -log -LogCmds="LogGameplayEvents Log" -motd -hostname="aaaa aaaa" -noeac
+screen -S Sand1 -d -m /home/ins/iss/Insurgency/Binaries/Linux/InsurgencyServer-Linux-Shipping ${array[$index]}?Game=CheckpointHardcore?MaxPlayers=6?Mutators=MapVoteLabels,Medic,lazymode -Mods -ModList=Mods.txt -ModDownloadTravelTo=${array[$index]}?Game=CheckpointHardcore -Port=7777 -QueryPort=27015 -GameStatsToken=secret -GameStats -GSLTToken=secret -log -LogCmds="LogGameplayEvents Log" -motd -hostname="aaaa aaaa" -noeac
