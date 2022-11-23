@@ -5,7 +5,7 @@
 
 # Kill server process
 killall InsurgencyServer-Linux-Shipping
-sleep 10
+#sleep 5
 
 # Start server
-/home/ins/server start > /dev/null 2>&1
+#/home/ins/server start > /dev/null 2>&1
