@@ -110,3 +110,14 @@ make sure /home/ins/iss/sissm/SISSM-Beta02.9/Linux/server1.html is owned by 'ins
 # Watch the server's log file in real-time
 ################################################################################
 tail -f /home/ins/iss/Insurgency/Saved/Logs/Insurgency.log
+
+
+
+
+################################################################################
+# Using SISSM as an RCON Tool
+################################################################################
+./sissm -t [ipaddr] [port] [RconPassword]
+OR
+Using PowerShell in Windows:
+sissm64.exe -t [ipaddr] [port] [RconPassword]
