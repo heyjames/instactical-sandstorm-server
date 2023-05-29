@@ -1,0 +1,11 @@
+'New connected player not spawning after capture' bug
+
+A recently connected player does not spawn after alive player(s) captures the current objective, so if the new player connects during the period where the...
+
+(Security) Crossing - Current objective: B (You don't spawn even when they capture B and C) You will spawn after they capture D
+(Security) Ministry - Current objective: Last
+(Security) Refinery - Current objective: Last
+(Security) Tell - Current objective: B
+(Security) Tideway - Current objective: Last (E)
+
+...the spawn will not happen.
